@@ -1,12 +1,16 @@
 export { artifact } from "./artifacts/artifact.js";
 export { output } from "./outputs/contracts.js";
 export { createAI } from "./runtime/create-ai.js";
+export { createMemoryArtifactStore } from "./storage/memory.js";
 
 export type { AI, RunIntent } from "./runtime/create-ai.js";
 export type {
+  ArtifactFingerprint,
   ArtifactInput,
   ArtifactKind,
   ArtifactRef,
+  ArtifactStorageRef,
+  ArtifactStore,
   ExecutionPlanStub,
   InferOutput,
   InferOutputMap,
@@ -25,6 +29,8 @@ export type {
   RunSuccess,
   SessionRef,
   StorageLike,
+  StoredArtifactEnvelope,
+  StoredArtifactPayloadDescriptor,
   TracerLike,
   ValidationIssue,
 } from "./runtime/public-types.js";

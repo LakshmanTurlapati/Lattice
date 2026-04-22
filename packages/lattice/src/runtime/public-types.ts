@@ -1,4 +1,10 @@
-export type { ArtifactInput, ArtifactKind, ArtifactRef } from "../artifacts/artifact.js";
+export type {
+  ArtifactFingerprint,
+  ArtifactInput,
+  ArtifactKind,
+  ArtifactRef,
+  ArtifactStorageRef,
+} from "../artifacts/artifact.js";
 export type {
   InferOutput,
   InferOutputMap,
@@ -18,7 +24,12 @@ export type {
 export type { LatticeRunError, ValidationIssue } from "../results/errors.js";
 export type { RunFailure, RunResult, RunSuccess } from "../results/result.js";
 export type { SessionRef } from "../sessions/session.js";
-export type { StorageLike } from "../storage/storage.js";
+export type {
+  ArtifactStore,
+  StorageLike,
+  StoredArtifactEnvelope,
+  StoredArtifactPayloadDescriptor,
+} from "../storage/storage.js";
 export type { TracerLike } from "../tracing/tracing.js";
 export type {
   LatticeConfig,
