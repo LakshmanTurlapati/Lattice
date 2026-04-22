@@ -76,7 +76,9 @@ describe("output validation boundary", () => {
     expect(result.ok).toBe(false);
     if (!result.ok) {
       expect(result.error.kind).toBe("validation");
-      expect(result.error.output).toBe("answer");
+      if (result.error.kind === "validation") {
+        expect(result.error.output).toBe("answer");
+      }
     }
   });
 
@@ -96,7 +98,9 @@ describe("output validation boundary", () => {
     expect(result.ok).toBe(false);
     if (!result.ok) {
       expect(result.error.kind).toBe("validation");
-      expect(result.error.output).toBe("action");
+      if (result.error.kind === "validation") {
+        expect(result.error.output).toBe("action");
+      }
     }
   });
 });
