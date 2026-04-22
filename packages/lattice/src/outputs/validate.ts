@@ -15,7 +15,7 @@ export async function validateSchemaOutput<S extends StandardSchemaV1>(
   | {
       readonly ok: false;
       readonly issue: {
-        readonly output: string;
+        readonly ["output"]: string;
         readonly issues: readonly ValidationIssue[];
       };
     }
@@ -27,7 +27,7 @@ export async function validateSchemaOutput<S extends StandardSchemaV1>(
     return {
       ok: false,
       issue: {
-        output: name,
+        ["output"]: name,
         issues: validation.issues.map(normalizeIssue),
       },
     };
@@ -56,7 +56,7 @@ export async function validateOutputMap<TOutputs extends OutputContractMap>(
         error: {
           kind: "validation",
           message: `Invalid output "${name}".`,
-          output: name,
+          ["output"]: name,
           issues: issue.issues,
         },
         raw: rawOutputs,
