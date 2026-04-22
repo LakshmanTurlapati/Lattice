@@ -98,7 +98,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Runtime API & Output Contracts | 2/4 | In Progress | - |
+| 1. Runtime API & Output Contracts | 3/4 | In Progress | - |
 | 2. Artifact Lifecycle & Storage | 0/TBD | Not started | - |
 | 3. Deterministic Planning & Execution Spine | 0/TBD | Not started | - |
 | 4. Context, Sessions & Provider Packaging | 0/TBD | Not started | - |

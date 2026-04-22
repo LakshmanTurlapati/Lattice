@@ -25,10 +25,10 @@ Requirements for the initial release. Each maps to roadmap phases.
 
 ### Output Contracts
 
-- [ ] **OUT-01**: Developer can request plain text output.
-- [ ] **OUT-02**: Developer can request structured JSON output using Zod or another Standard Schema-compatible validator.
-- [ ] **OUT-03**: Lattice validates structured outputs and returns typed success or typed validation failure.
-- [ ] **OUT-04**: Lattice can return multiple outputs from one run, including text, typed JSON, citations/artifact references, and generated artifact references.
+- [x] **OUT-01**: Developer can request plain text output.
+- [x] **OUT-02**: Developer can request structured JSON output using Zod or another Standard Schema-compatible validator.
+- [x] **OUT-03**: Lattice validates structured outputs and returns typed success or typed validation failure.
+- [x] **OUT-04**: Lattice can return multiple outputs from one run, including text, typed JSON, citations/artifact references, and generated artifact references.
 
 ### Capability Catalog And Routing
 
@@ -146,10 +146,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ART-03 | Phase 2 | Pending |
 | ART-04 | Phase 2 | Pending |
 | ART-05 | Phase 2 | Pending |
-| OUT-01 | Phase 1 | Pending |
-| OUT-02 | Phase 1 | Pending |
-| OUT-03 | Phase 1 | Pending |
-| OUT-04 | Phase 1 | Pending |
+| OUT-01 | Phase 1 | Complete |
+| OUT-02 | Phase 1 | Complete |
+| OUT-03 | Phase 1 | Complete |
+| OUT-04 | Phase 1 | Complete |
 | ROUT-01 | Phase 3 | Pending |
 | ROUT-02 | Phase 3 | Pending |
 | ROUT-03 | Phase 3 | Pending |
