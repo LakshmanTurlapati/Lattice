@@ -14,11 +14,11 @@ Developers can run one capability-first task across mixed text, image, audio, vi
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] Phase 1 package/API spine: named `createAI`, `artifact`, and `output` exports; typed `ai.run({ task, artifacts, outputs, policy, session })`; `ai.session(id)` placeholder references; Lattice-owned config, provider, policy, storage, tracing, artifact, session, result, and output contract types; Standard Schema/Zod-compatible output inference and validation.
 
 ### Active
 
-- [ ] Provide a tiny public TypeScript API centered on `createAI`, `session`, `run`, `artifact`, `branch`, `replay`, and execution plans.
+- [ ] Extend the tiny public TypeScript API beyond the Phase 1 spine with durable sessions, `branch`, `replay`, and richer execution plan behavior.
 - [ ] Model all inputs, outputs, files, media, and tool results as first-class `Artifact`s with reusable references.
 - [ ] Let developers express tasks in terms of requested outputs and policy constraints rather than hardcoded provider/model calls.
 - [ ] Implement automatic context management with live context, compressed summary, and archived raw artifacts.
@@ -50,6 +50,8 @@ The missing category is a capability-first runtime SDK rather than another provi
 
 The wedge is the multimodal work inbox: support, insurance, logistics, field operations, healthcare administration, recruiting, and creator tools all need to process combinations of user messages, screenshots/photos, voice notes/call recordings, and PDFs/manuals/policies into answers, structured actions, and sometimes speech.
 
+Phase 1 completed on 2026-04-22. Lattice now has a verified TypeScript package foundation with named public exports, provider-neutral runtime/config/policy/artifact/session contracts, typed multi-output result inference, Standard Schema/Zod validation, a Phase 1 `ai.run` skeleton, and an `ai.session(id)` placeholder.
+
 ## Constraints
 
 - **Language**: TypeScript-first — closest competitors and early adopters are strongest in the app/product integration ecosystem.
@@ -70,6 +72,7 @@ The wedge is the multimodal work inbox: support, insurance, logistics, field ope
 | Make artifacts the universal content model | Text, image, audio, video, PDF, JSON, and tool results need the same lifecycle: reference, transform, package, reuse, trace. | — Pending |
 | Treat context management as built-in runtime behavior | Manual trimming, summarizer middleware, and developer-managed file stuffing are core pain points this product should remove. | — Pending |
 | Focus the first showcase on the multimodal work inbox | It exercises text, image, audio, files, structured outputs, policy routing, artifact packaging, and optional speech in one understandable workflow. | — Pending |
+| Keep Phase 1 sessions as references only | Full persistence, context packs, summaries, branching, and replay belong in later phases; Phase 1 only needs a stable public placeholder. | `ai.session(id)` returns a `SessionRef` and can be passed into `ai.run`. |
 
 ## Evolution
 
@@ -89,4 +92,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-22 after initialization*
+*Last updated: 2026-04-22 after Phase 1 completion*
