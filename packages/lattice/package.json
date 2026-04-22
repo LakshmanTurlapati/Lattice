@@ -21,7 +21,7 @@
     "build": "tsdown",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
-    "test:types": "vitest typecheck --run && tsd",
+    "test:types": "vitest --typecheck --run && tsd",
     "lint:packages": "pnpm build && publint && attw --pack . --profile esm-only"
   },
   "dependencies": {
