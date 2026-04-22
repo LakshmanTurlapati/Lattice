@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { artifact } from "../src/artifacts/artifact.js";
+import {
+  artifact,
+  isArtifactRef,
+  toArtifactRef,
+} from "../src/artifacts/artifact.js";
+import type { ArtifactTransformKind } from "../src/artifacts/lineage.js";
 
 describe("artifact constructors", () => {
   it("creates text artifacts with privacy and cheap size metadata", () => {
@@ -104,5 +109,91 @@ describe("artifact constructors", () => {
         status: "ok",
       },
     });
+  });
+
+  it("creates derived artifacts with payload-free parent lineage", () => {
+    const audioRef = artifact.audio("call.mp3", {
+      id: "artifact:audio:call",
+      privacy: "sensitive",
+    });
+
+    const transcript = artifact.derive({
+      kind: "text",
+      value: "transcript",
+      source: "generated",
+      parents: [audioRef],
+      transform: {
+        kind: "transcription",
+        name: "fixture transcript",
+      },
+    });
+
+    expect(transcript).toMatchObject({
+      kind: "text",
+      source: "generated",
+      mediaType: "text/plain",
+      privacy: "standard",
+      value: "transcript",
+      lineage: {
+        parents: [
+          {
+            id: "artifact:audio:call",
+            kind: "audio",
+            source: "file",
+            mediaType: "audio/mpeg",
+            privacy: "sensitive",
+          },
+        ],
+        transform: {
+          kind: "transcription",
+          name: "fixture transcript",
+        },
+      },
+    });
+    expect(transcript.lineage?.parents[0]).not.toHaveProperty("value");
+  });
+
+  it("keeps public refs payload-free", () => {
+    const input = artifact.text("secret");
+    const ref = toArtifactRef(input);
+
+    expect(ref).toMatchObject({
+      id: input.id,
+      kind: "text",
+      source: "inline",
+      mediaType: "text/plain",
+      privacy: "standard",
+    });
+    expect(ref).not.toHaveProperty("value");
+  });
+
+  it("detects artifact refs structurally", () => {
+    expect(
+      isArtifactRef({
+        id: "artifact:text:1",
+        kind: "text",
+        source: "generated",
+        privacy: "standard",
+      }),
+    ).toBe(true);
+  });
+
+  it("covers supported lineage transform kinds", () => {
+    const transformKinds = [
+      "manual",
+      "generated",
+      "extraction",
+      "chunking",
+      "transcription",
+      "resizing",
+      "provider-packaging",
+      "tool-result",
+      "model-output",
+    ] satisfies readonly ArtifactTransformKind[];
+
+    expect(transformKinds).toContain("provider-packaging");
+    expect(transformKinds).toContain("transcription");
+    expect(transformKinds).toContain("model-output");
+    expect(transformKinds).toContain("tool-result");
   });
 });
