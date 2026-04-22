@@ -1,10 +1,17 @@
 import { describe, expect, it } from "vitest";
 
+import { artifact } from "../src/artifacts/artifact.js";
 import { mergePolicy, type PolicySpec } from "../src/policy/policy.js";
 import type {
   ProviderAdapter,
   ProviderRef,
 } from "../src/providers/provider.js";
+import {
+  normalizeConfig,
+  type LatticeConfig,
+} from "../src/runtime/config.js";
+import type { StorageLike } from "../src/storage/storage.js";
+import type { TracerLike } from "../src/tracing/tracing.js";
 
 describe("phase 1 runtime contracts", () => {
   it("accepts opaque provider refs and adapters", async () => {
@@ -86,5 +93,75 @@ describe("phase 1 runtime contracts", () => {
       },
     });
     expect(mergePolicy()).toBeUndefined();
+  });
+
+  it("creates phase 1 artifact helper stubs", () => {
+    expect(artifact.text("hello")).toMatchObject({
+      kind: "text",
+      source: "inline",
+      mediaType: "text/plain",
+      value: "hello",
+    });
+
+    expect(
+      artifact.file("invoice.pdf", { mediaType: "application/pdf" }),
+    ).toMatchObject({
+      kind: "file",
+      source: "file",
+      mediaType: "application/pdf",
+      value: "invoice.pdf",
+    });
+  });
+
+  it("normalizes string providers and preserves policy defaults", () => {
+    const policy: PolicySpec = {
+      maxCostUsd: 5,
+      latency: "batch",
+      privacy: "restricted",
+      noUpload: true,
+    };
+
+    const normalized = normalizeConfig({
+      providers: ["fixture"],
+      defaults: {
+        policy,
+      },
+    });
+
+    expect(normalized.providers).toEqual([
+      {
+        id: "fixture",
+        kind: "provider-ref",
+      },
+    ]);
+    expect(normalized.defaults.policy).toBe(policy);
+  });
+
+  it("normalizes disabled storage and tracing out of config", () => {
+    const disabled = normalizeConfig({
+      storage: false,
+      tracing: false,
+    });
+
+    expect(disabled.storage).toBeUndefined();
+    expect(disabled.tracing).toBeUndefined();
+
+    const storage = {
+      kind: "storage",
+      put: async () => {},
+    } satisfies StorageLike;
+    const tracing = {
+      kind: "tracer",
+      span: (_name, fn) => fn(),
+    } satisfies TracerLike;
+    const config = {
+      storage,
+      tracing,
+    } satisfies LatticeConfig;
+
+    const enabled = normalizeConfig(config);
+
+    expect(enabled.storage).toBe(storage);
+    expect(enabled.tracing).toBe(tracing);
   });
 });
