@@ -9,12 +9,13 @@ import { createAI } from "../src/runtime/create-ai.js";
 
 describe("createAI runtime facade", () => {
   it("runs a fixture provider adapter and validates typed outputs", async () => {
+    const supportCase = artifact.text("support case");
     const adapter = {
       id: "fixture",
       kind: "provider-adapter",
       execute: async (request) => {
         expect(request.task).toBe("Resolve support case");
-        expect(request.artifacts).toEqual([artifact.text("support case")]);
+        expect(request.artifacts).toEqual([supportCase]);
         expect(request.outputs).toEqual(["answer", "action", "evidence", "generated"]);
         expect(request.policy).toEqual({
           maxCostUsd: 2,
@@ -58,7 +59,7 @@ describe("createAI runtime facade", () => {
 
     const result = await ai.run({
       task: "Resolve support case",
-      artifacts: [artifact.text("support case")],
+      artifacts: [supportCase],
       outputs: {
         answer: "text",
         action: z.object({
