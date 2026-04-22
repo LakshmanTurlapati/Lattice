@@ -1,6 +1,7 @@
 export { artifact } from "./artifacts/artifact.js";
 export { output } from "./outputs/contracts.js";
 export { createAI } from "./runtime/create-ai.js";
+export { createLocalArtifactStore } from "./storage/local.js";
 export { createMemoryArtifactStore } from "./storage/memory.js";
 
 export type { AI, RunIntent } from "./runtime/create-ai.js";

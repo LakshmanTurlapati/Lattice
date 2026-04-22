@@ -44,6 +44,7 @@
     "mime": "catalog:"
   },
   "devDependencies": {
+    "@types/node": "catalog:",
     "zod": "catalog:"
   }
 }
