@@ -1,6 +1,7 @@
 import { describe, expect, expectTypeOf, it } from "vitest";
 import { z } from "zod";
 
+import { artifact } from "../src/artifacts/artifact.js";
 import { output } from "../src/outputs/contracts.js";
 import type {
   InferOutput,
@@ -108,6 +109,9 @@ describe("output validation boundary", () => {
   });
 
   it("accepts citations and generated artifact output arrays", async () => {
+    const generated = artifact.file("receipt.txt", {
+      id: "artifact:file:generated",
+    });
     const result = await validateOutputMap(
       {
         answer: "text",
@@ -122,13 +126,7 @@ describe("output validation boundary", () => {
             label: "case note",
           },
         ],
-        generated: [
-          {
-            id: "artifact:file:generated",
-            kind: "file",
-            source: "generated",
-          },
-        ],
+        generated: [generated],
       },
       createExecutionPlanStub(),
     );
@@ -137,6 +135,98 @@ describe("output validation boundary", () => {
     if (result.ok) {
       expect(Array.isArray(result.outputs.evidence)).toBe(true);
       expect(Array.isArray(result.outputs.generated)).toBe(true);
+    }
+  });
+
+  it("strips payloads from valid generated artifact outputs", async () => {
+    const generated = artifact.document("manual.pdf", {
+      id: "artifact:document:manual",
+      label: "manual",
+      metadata: {
+        pageCount: 12,
+      },
+    });
+
+    const result = await validateOutputMap(
+      {
+        generated: output.artifacts({ artifactKind: "document" }),
+      },
+      {
+        generated: [generated],
+      },
+      createExecutionPlanStub(),
+    );
+
+    expect(result.ok).toBe(true);
+    if (result.ok) {
+      expect(result.outputs.generated).toEqual([
+        {
+          id: "artifact:document:manual",
+          kind: "document",
+          source: "file",
+          privacy: "standard",
+          mediaType: "application/pdf",
+          label: "manual",
+          metadata: {
+            pageCount: 12,
+          },
+        },
+      ]);
+      expect(result.outputs.generated[0]).not.toHaveProperty("value");
+    }
+  });
+
+  it("rejects invalid generated artifact output items", async () => {
+    const result = await validateOutputMap(
+      {
+        generated: output.artifacts(),
+      },
+      {
+        generated: [
+          {
+            id: "artifact:document:manual",
+            kind: "document",
+            source: "file",
+          },
+        ],
+      },
+      createExecutionPlanStub(),
+    );
+
+    expect(result.ok).toBe(false);
+    if (!result.ok && result.error.kind === "validation") {
+      expect(result.error.output).toBe("generated");
+      expect(result.error.issues).toEqual([
+        {
+          message: "Expected artifacts output item to be an artifact ref.",
+        },
+      ]);
+    }
+  });
+
+  it("rejects generated artifact outputs with the wrong kind", async () => {
+    const result = await validateOutputMap(
+      {
+        generated: output.artifacts({ artifactKind: "document" }),
+      },
+      {
+        generated: [
+          artifact.image("package.png", {
+            id: "artifact:image:package",
+          }),
+        ],
+      },
+      createExecutionPlanStub(),
+    );
+
+    expect(result.ok).toBe(false);
+    if (!result.ok && result.error.kind === "validation") {
+      expect(result.error.output).toBe("generated");
+      expect(result.error.issues).toEqual([
+        {
+          message: 'Expected artifacts output item kind to be "document".',
+        },
+      ]);
     }
   });
 });

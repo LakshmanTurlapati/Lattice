@@ -17,12 +17,56 @@ describe("createAI runtime facade", () => {
 
   it("runs a fixture provider adapter and validates typed outputs", async () => {
     const supportCase = artifact.text("support case");
+    const audio = artifact.audio("call.mp3", {
+      id: "artifact:audio:call",
+      privacy: "sensitive",
+    });
+    const transcript = artifact.derive({
+      id: "artifact:text:transcript",
+      kind: "text",
+      value: "caller transcript",
+      label: "transcript",
+      parents: [audio],
+      transform: {
+        kind: "transcription",
+        name: "fixture-transcript",
+      },
+    });
+    const toolResult = artifact.toolResult(
+      { approved: true },
+      {
+        id: "artifact:tool-result:refund-check",
+        toolName: "refundPolicyCheck",
+        callId: "call_123",
+      },
+    );
+    const providerHandle = artifact.derive({
+      id: "artifact:file:provider-handle",
+      kind: "file",
+      source: "provider-upload",
+      value: {
+        provider: "fixture",
+        handle: "file_fixture_123",
+      },
+      metadata: {
+        provider: "fixture",
+        handle: "file_fixture_123",
+      },
+      parents: [supportCase],
+      transform: {
+        kind: "provider-packaging",
+        name: "fixture-provider-upload",
+        parameters: {
+          transport: "provider-upload",
+        },
+      },
+    });
     const adapter = {
       id: "fixture",
       kind: "provider-adapter",
       execute: async (request) => {
         expect(request.task).toBe("Resolve support case");
-        expect(request.artifacts).toEqual([supportCase]);
+        expect(request.artifacts).toEqual([supportCase, audio]);
         expect(request.outputs).toEqual(["answer", "action", "evidence", "generated"]);
         expect(request.policy).toEqual({
           maxCostUsd: 2,
@@ -36,20 +80,12 @@ describe("createAI runtime facade", () => {
             action: { kind: "refund", reason: "billing mismatch" },
             evidence: [{ artifactId: "artifact:text:case" }],
             generated: [
-              {
-                id: "artifact:file:receipt",
-                kind: "file",
-                source: "generated",
-              },
+              transcript,
+              toolResult,
+              providerHandle,
             ],
           },
-          artifactRefs: [
-            {
-              id: "artifact:file:receipt",
-              kind: "file",
-              source: "generated",
-            },
-          ],
+          artifactRefs: [transcript, toolResult, providerHandle],
         };
       },
     } satisfies ProviderAdapter;
@@ -66,7 +102,7 @@ describe("createAI runtime facade", () => {
 
     const result = await ai.run({
       task: "Resolve support case",
-      artifacts: [supportCase],
+      artifacts: [supportCase, audio],
       outputs: {
         answer: "text",
         action: z.object({
@@ -88,11 +124,83 @@ describe("createAI runtime facade", () => {
       expect(result.outputs.action.reason).toBe("billing mismatch");
       expect(result.artifacts).toEqual([
         {
-          id: "artifact:file:receipt",
-          kind: "file",
+          id: "artifact:text:transcript",
+          kind: "text",
           source: "generated",
+          privacy: "standard",
+          mediaType: "text/plain",
+          label: "transcript",
+          size: {
+            bytes: 17,
+            characters: 17,
+          },
+          lineage: {
+            parents: [
+              {
+                id: "artifact:audio:call",
+                kind: "audio",
+                source: "file",
+                privacy: "sensitive",
+                mediaType: "audio/mpeg",
+              },
+            ],
+            transform: {
+              kind: "transcription",
+              name: "fixture-transcript",
+            },
+          },
+        },
+        {
+          id: "artifact:tool-result:refund-check",
+          kind: "tool-result",
+          source: "tool",
+          privacy: "standard",
+          mediaType: "application/json",
+          metadata: {
+            callId: "call_123",
+            toolName: "refundPolicyCheck",
+          },
+          size: {
+            bytes: 17,
+            characters: 17,
+          },
+        },
+        {
+          id: "artifact:file:provider-handle",
+          kind: "file",
+          source: "provider-upload",
+          privacy: "standard",
+          metadata: {
+            provider: "fixture",
+            handle: "file_fixture_123",
+          },
+          lineage: {
+            parents: [
+              {
+                id: expect.stringMatching(/^artifact:text:/),
+                kind: "text",
+                source: "inline",
+                privacy: "standard",
+                mediaType: "text/plain",
+                size: {
+                  bytes: 12,
+                  characters: 12,
+                },
+              },
+            ],
+            transform: {
+              kind: "provider-packaging",
+              name: "fixture-provider-upload",
+              parameters: {
+                transport: "provider-upload",
+              },
+            },
+          },
         },
       ]);
+      for (const resultArtifact of result.artifacts) {
+        expect(resultArtifact).not.toHaveProperty("value");
+      }
       expect(result.plan.kind).toBe("plan-stub");
     }
   });
