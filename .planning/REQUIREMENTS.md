@@ -20,7 +20,7 @@ Requirements for the initial release. Each maps to roadmap phases.
 - [x] **ART-01**: Developer can create text, JSON, file, image, audio, document/PDF, URL, and tool-result artifacts.
 - [x] **ART-02**: Each artifact has a stable ID, kind, media type, source, size metadata when available, privacy labels, and storage reference.
 - [x] **ART-03**: Lattice records parent/derived artifact lineage for transforms such as extraction, chunking, transcription, resizing, and provider packaging.
-- [ ] **ART-04**: Lattice can store artifacts in memory and local filesystem stores for development, testing, and replay fixtures.
+- [x] **ART-04**: Lattice can store artifacts in memory and local filesystem stores for development, testing, and replay fixtures.
 - [x] **ART-05**: Generated outputs, tool results, transcripts, and packaged provider handles are represented as artifacts rather than ad hoc response fields.
 
 ### Output Contracts
@@ -144,7 +144,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | ART-01 | Phase 2 | Complete |
 | ART-02 | Phase 2 | Complete |
 | ART-03 | Phase 2 | Complete |
-| ART-04 | Phase 2 | Pending |
+| ART-04 | Phase 2 | Complete |
 | ART-05 | Phase 2 | Complete |
 | OUT-01 | Phase 1 | Complete |
 | OUT-02 | Phase 1 | Complete |
