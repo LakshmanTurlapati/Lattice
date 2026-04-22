@@ -121,12 +121,7 @@ describe("phase 1 runtime contracts", () => {
       noUpload: true,
     };
 
-    const normalized = normalizeConfig({
-      providers: ["fixture"],
-      defaults: {
-        policy,
-      },
-    });
+    const normalized = normalizeConfig({ providers: ["fixture"], defaults: { policy } });
 
     expect(normalized.providers).toEqual([
       {
