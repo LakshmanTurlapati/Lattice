@@ -41,7 +41,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. Each artifact exposes a stable ID, kind, media type, source, available size metadata, privacy labels, and storage reference.
   3. Developer can store and reload artifacts from memory and local filesystem stores for development, testing, and replay fixtures.
   4. Derived and generated artifacts retain parent lineage through extraction, chunking, transcription, resizing, provider packaging, tool results, and model outputs.
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 02-01-PLAN.md — Artifact constructors, metadata, privacy, refs, and lineage descriptors
+- [ ] 02-02-PLAN.md — Memory and local filesystem artifact stores with metadata/payload separation
+- [ ] 02-03-PLAN.md — Public exports plus runtime/output artifact-ref integration
 
 ### Phase 3: Deterministic Planning & Execution Spine
 **Goal**: Developers can dry-run and execute provider-independent plans with deterministic routing, observable stages/events, fake providers, and honest no-route or fallback behavior.
@@ -99,7 +103,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Runtime API & Output Contracts | 4/4 | Complete | 2026-04-22 |
-| 2. Artifact Lifecycle & Storage | 0/TBD | Not started | - |
+| 2. Artifact Lifecycle & Storage | 0/3 | Not started | - |
 | 3. Deterministic Planning & Execution Spine | 0/TBD | Not started | - |
 | 4. Context, Sessions & Provider Packaging | 0/TBD | Not started | - |
 | 5. Tools, Replay & Observability | 0/TBD | Not started | - |
