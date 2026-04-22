@@ -1,5 +1,6 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
+import { isArtifactRef, toArtifactRef } from "../artifacts/artifact.js";
 import type { ExecutionPlanStub } from "../plan/plan.js";
 import type { ValidationIssue } from "../results/errors.js";
 import type { RunResult } from "../results/result.js";
@@ -119,14 +120,41 @@ async function validateOutput(
     return { ok: true, value };
   }
 
-  if (!Array.isArray(value)) {
-    return {
-      ok: false,
-      issues: [{ message: "Expected artifacts output to be an array." }],
-    };
+  if (contract.kind === "artifacts") {
+    if (!Array.isArray(value)) {
+      return {
+        ok: false,
+        issues: [{ message: "Expected artifacts output to be an array." }],
+      };
+    }
+
+    for (const item of value) {
+      if (!isArtifactRef(item)) {
+        return {
+          ok: false,
+          issues: [{ message: "Expected artifacts output item to be an artifact ref." }],
+        };
+      }
+
+      if (contract.artifactKind !== undefined && item.kind !== contract.artifactKind) {
+        return {
+          ok: false,
+          issues: [
+            {
+              message: `Expected artifacts output item kind to be "${contract.artifactKind}".`,
+            },
+          ],
+        };
+      }
+    }
+
+    return { ok: true, value: value.map(toArtifactRef) };
   }
 
-  return { ok: true, value };
+  return {
+    ok: false,
+    issues: [{ message: "Unsupported output contract." }],
+  };
 }
 
 function isStandardSchema(contract: OutputContract): contract is StandardSchemaV1 {

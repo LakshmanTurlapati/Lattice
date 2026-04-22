@@ -56,7 +56,7 @@ describe("createAI runtime facade", () => {
       transform: {
         kind: "provider-packaging",
         name: "fixture-provider-upload",
-        parameters: {
+        metadata: {
           transport: "provider-upload",
         },
       },
@@ -160,10 +160,6 @@ describe("createAI runtime facade", () => {
             callId: "call_123",
             toolName: "refundPolicyCheck",
           },
-          size: {
-            bytes: 17,
-            characters: 17,
-          },
         },
         {
           id: "artifact:file:provider-handle",
@@ -191,7 +187,7 @@ describe("createAI runtime facade", () => {
             transform: {
               kind: "provider-packaging",
               name: "fixture-provider-upload",
-              parameters: {
+              metadata: {
                 transport: "provider-upload",
               },
             },

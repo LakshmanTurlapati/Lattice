@@ -1,4 +1,5 @@
-import type { ArtifactInput, ArtifactRef } from "../artifacts/artifact.js";
+import type { ArtifactInput } from "../artifacts/artifact.js";
+import { toArtifactRef } from "../artifacts/artifact.js";
 import type { OutputContractMap } from "../outputs/contracts.js";
 import { validateOutputMap } from "../outputs/validate.js";
 import { createExecutionPlanStub } from "../plan/plan.js";
@@ -91,7 +92,7 @@ async function runWithConfig<const TOutputs extends OutputContractMap>(
       ...validation,
       artifacts:
         response.artifactRefs !== undefined
-          ? (response.artifactRefs as readonly ArtifactRef[])
+          ? response.artifactRefs.map(toArtifactRef)
           : [],
       plan,
     };

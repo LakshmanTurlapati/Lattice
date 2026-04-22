@@ -1,3 +1,5 @@
+import type { ArtifactInput, ArtifactRef } from "../artifacts/artifact.js";
+
 export interface ProviderRef {
   readonly id: string;
   readonly kind?: "provider-ref";
@@ -5,7 +7,7 @@ export interface ProviderRef {
 
 export interface ProviderRunRequest {
   readonly task: string;
-  readonly artifacts: readonly unknown[];
+  readonly artifacts: readonly ArtifactInput[];
   readonly outputs: readonly string[];
   readonly policy?: unknown;
   readonly signal?: AbortSignal;
@@ -13,7 +15,7 @@ export interface ProviderRunRequest {
 
 export interface ProviderRunResponse {
   readonly rawOutputs: Record<string, unknown>;
-  readonly artifactRefs?: readonly unknown[];
+  readonly artifactRefs?: readonly (ArtifactInput | ArtifactRef)[];
 }
 
 export interface ProviderAdapter {
