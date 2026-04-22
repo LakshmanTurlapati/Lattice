@@ -1,0 +1,12 @@
+packages:
+  - "packages/*"
+
+catalog:
+  "@standard-schema/spec": 1.1.0
+  zod: 4.3.6
+  typescript: 6.0.3
+  tsdown: 0.21.9
+  vitest: 4.1.5
+  tsd: 0.33.0
+  publint: 0.3.18
+  "@arethetypeswrong/cli": 0.18.2

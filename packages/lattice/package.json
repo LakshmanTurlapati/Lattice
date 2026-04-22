@@ -1,0 +1,33 @@
+{
+  "name": "lattice",
+  "version": "0.0.0",
+  "description": "TypeScript-first capability runtime SDK for AI applications",
+  "type": "module",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=24"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:types": "vitest typecheck --run && tsd",
+    "lint:packages": "pnpm build && publint && attw --pack . --profile esm-only"
+  },
+  "dependencies": {
+    "@standard-schema/spec": "catalog:"
+  },
+  "devDependencies": {
+    "zod": "catalog:"
+  }
+}
