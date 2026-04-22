@@ -1,14 +1,14 @@
-# Switchboard
+# Lattice
 
 ## What This Is
 
-Switchboard is a TypeScript-first capability runtime SDK for AI applications. Developers describe the job, provide any mix of artifacts, declare desired outputs, and set policy constraints; Switchboard handles provider routing, context packing, artifact transport, fallback, replay, and inspectable execution plans.
+Lattice is a TypeScript-first capability runtime SDK for AI applications. Developers describe the job, provide any mix of artifacts, declare desired outputs, and set policy constraints; Lattice handles provider routing, context packing, artifact transport, fallback, replay, and inspectable execution plans.
 
 The product is for developers building multimodal AI features who do not want to wire together separate chat, image, transcription, speech, file, memory, routing, and provider abstractions by hand.
 
 ## Core Value
 
-Developers can run one capability-first task across mixed text, image, audio, video, file, JSON, and tool artifacts while Switchboard reliably chooses, packages, routes, and explains the underlying model work.
+Developers can run one capability-first task across mixed text, image, audio, video, file, JSON, and tool artifacts while Lattice reliably chooses, packages, routes, and explains the underlying model work.
 
 ## Requirements
 
@@ -46,7 +46,7 @@ As of April 2026, comparable tools each cover part of the desired surface:
 - LiteLLM is strong routing infrastructure with a common interface across many providers plus fallback, context-window fallback, image generation, transcription, speech, and MCP gateway capabilities.
 - LangChain/LangGraph and OpenAI Agents SDK are strong on context, orchestration, sessions, compaction, tracing, and voice, but they do not provide the tiny universal capability runtime described here.
 
-The missing category is a capability-first runtime SDK rather than another provider wrapper. The developer should provide the task, artifacts, outputs, budget, privacy, latency, and quality constraints; Switchboard should build a context pack, prepare artifacts for the chosen providers, execute one or more model stages, handle fallbacks, and return a structured result plus an inspectable plan.
+The missing category is a capability-first runtime SDK rather than another provider wrapper. The developer should provide the task, artifacts, outputs, budget, privacy, latency, and quality constraints; Lattice should build a context pack, prepare artifacts for the chosen providers, execute one or more model stages, handle fallbacks, and return a structured result plus an inspectable plan.
 
 The wedge is the multimodal work inbox: support, insurance, logistics, field operations, healthcare administration, recruiting, and creator tools all need to process combinations of user messages, screenshots/photos, voice notes/call recordings, and PDFs/manuals/policies into answers, structured actions, and sometimes speech.
 
@@ -64,7 +64,7 @@ The wedge is the multimodal work inbox: support, insurance, logistics, field ope
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Build Switchboard as a capability-first runtime SDK | The missing product is a layer above provider adapters and media APIs, not another wrapper around one model API. | — Pending |
+| Build Lattice as a capability-first runtime SDK | The missing product is a layer above provider adapters and media APIs, not another wrapper around one model API. | — Pending |
 | Start TypeScript-first | The strongest adjacent products and app integration pain are in the TypeScript ecosystem. | — Pending |
 | Use a deterministic router for v0.1 | Inspectability and trust matter more than magical but opaque routing early. | — Pending |
 | Make artifacts the universal content model | Text, image, audio, video, PDF, JSON, and tool results need the same lifecycle: reference, transform, package, reuse, trace. | — Pending |
