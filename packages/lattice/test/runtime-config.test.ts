@@ -10,7 +10,7 @@ import {
   normalizeConfig,
   type LatticeConfig,
 } from "../src/runtime/config.js";
-import type { StorageLike } from "../src/storage/storage.js";
+import { createMemoryArtifactStore } from "../src/storage/memory.js";
 import type { TracerLike } from "../src/tracing/tracing.js";
 
 describe("phase 1 runtime contracts", () => {
@@ -141,10 +141,7 @@ describe("phase 1 runtime contracts", () => {
     expect(disabled.storage).toBeUndefined();
     expect(disabled.tracing).toBeUndefined();
 
-    const storage = {
-      kind: "storage",
-      put: async () => {},
-    } satisfies StorageLike;
+    const storage = createMemoryArtifactStore({ id: "config-store" });
     const tracing = {
       kind: "tracer",
       span: (_name, fn) => fn(),
