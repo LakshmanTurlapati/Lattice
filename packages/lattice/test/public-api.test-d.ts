@@ -5,12 +5,17 @@ import { artifact, createAI, output, type RunResult } from "../src/index.js";
 
 test("source public API infers named run outputs", async () => {
   const ai = createAI();
+  const session = ai.session("support-case-1");
+  expectTypeOf(session.id).toEqualTypeOf<string>();
+  expectTypeOf(session.kind).toEqualTypeOf<"session-ref" | undefined>();
+
   const schema = z.object({
     kind: z.literal("refund"),
     reason: z.string(),
   });
   const result = await ai.run({
     task: "Resolve case",
+    session,
     artifacts: [artifact.text("support case")],
     outputs: {
       answer: "text",

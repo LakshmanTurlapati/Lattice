@@ -8,6 +8,13 @@ import type { ProviderAdapter } from "../src/providers/provider.js";
 import { createAI } from "../src/runtime/create-ai.js";
 
 describe("createAI runtime facade", () => {
+  it("creates phase 1 session references without persistence behavior", () => {
+    expect(createAI().session("support-case-1")).toEqual({
+      id: "support-case-1",
+      kind: "session-ref",
+    });
+  });
+
   it("runs a fixture provider adapter and validates typed outputs", async () => {
     const supportCase = artifact.text("support case");
     const adapter = {

@@ -22,6 +22,7 @@ export interface RunIntent<TOutputs extends OutputContractMap> {
 }
 
 export interface AI {
+  session(id: string): SessionRef;
   run<const TOutputs extends OutputContractMap>(
     intent: RunIntent<TOutputs>,
   ): Promise<RunResult<TOutputs>>;
@@ -31,6 +32,12 @@ export function createAI(config: LatticeConfig = {}): AI {
   const normalized = normalizeConfig(config);
 
   return {
+    session(id: string): SessionRef {
+      return {
+        id,
+        kind: "session-ref",
+      };
+    },
     run<const TOutputs extends OutputContractMap>(
       intent: RunIntent<TOutputs>,
     ): Promise<RunResult<TOutputs>> {

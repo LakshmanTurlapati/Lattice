@@ -2,6 +2,7 @@ import { expectType } from "tsd";
 import { z } from "zod";
 
 import { artifact, createAI, output } from "lattice";
+import type { SessionRef } from "lattice";
 
 const schema = z.object({
   kind: z.literal("refund"),
@@ -10,8 +11,12 @@ const schema = z.object({
 
 async function verifyPackageTypes(): Promise<void> {
   const ai = createAI();
+  const session = ai.session("support-case-1");
+  expectType<SessionRef>(session);
+
   const result = await ai.run({
     task: "Resolve case",
+    session,
     artifacts: [artifact.text("support case")],
     outputs: {
       answer: "text",
