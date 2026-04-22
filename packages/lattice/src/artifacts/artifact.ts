@@ -1,4 +1,8 @@
 import type { PolicySpec } from "../policy/policy.js";
+import type {
+  ArtifactLineage,
+  ArtifactTransformDescriptor,
+} from "./lineage.js";
 import { inferMediaType, measureArtifactValue } from "./metadata.js";
 
 export type ArtifactKind =
@@ -52,11 +56,20 @@ export interface ArtifactOptions {
   readonly size?: ArtifactSize;
   readonly fingerprint?: ArtifactFingerprint;
   readonly storage?: ArtifactStorageRef;
+  readonly lineage?: ArtifactLineage;
 }
 
 export interface ArtifactToolResultOptions extends ArtifactOptions {
   readonly toolName: string;
   readonly callId?: string;
+}
+
+export interface ArtifactDerivedOptions extends ArtifactOptions {
+  readonly kind: ArtifactKind;
+  readonly source?: ArtifactSource;
+  readonly value?: unknown;
+  readonly parents: readonly ArtifactRef[];
+  readonly transform: ArtifactTransformDescriptor;
 }
 
 export interface ArtifactRef {
@@ -70,6 +83,7 @@ export interface ArtifactRef {
   readonly size?: ArtifactSize;
   readonly fingerprint?: ArtifactFingerprint;
   readonly storage?: ArtifactStorageRef;
+  readonly lineage?: ArtifactLineage;
 }
 
 export type ArtifactInput = ArtifactRef & {
@@ -121,7 +135,55 @@ export const artifact = {
       "application/json",
     );
   },
+
+  derive(input: ArtifactDerivedOptions): ArtifactInput {
+    const {
+      kind,
+      source = "generated",
+      value,
+      parents,
+      transform,
+      ...options
+    } = input;
+
+    return createArtifact(kind, source, value, {
+      ...options,
+      lineage: {
+        parents: parents.map(toArtifactRef),
+        transform,
+      },
+    }, defaultMediaTypeForKind(kind));
+  },
 };
+
+export function toArtifactRef(input: ArtifactInput | ArtifactRef): ArtifactRef {
+  return {
+    id: input.id,
+    kind: input.kind,
+    source: input.source,
+    privacy: input.privacy,
+    ...(input.mediaType !== undefined ? { mediaType: input.mediaType } : {}),
+    ...(input.label !== undefined ? { label: input.label } : {}),
+    ...(input.metadata !== undefined ? { metadata: input.metadata } : {}),
+    ...(input.size !== undefined ? { size: input.size } : {}),
+    ...(input.fingerprint !== undefined ? { fingerprint: input.fingerprint } : {}),
+    ...(input.storage !== undefined ? { storage: input.storage } : {}),
+    ...(input.lineage !== undefined ? { lineage: input.lineage } : {}),
+  };
+}
+
+export function isArtifactRef(value: unknown): value is ArtifactRef {
+  if (!isRecord(value)) {
+    return false;
+  }
+
+  return (
+    typeof value.id === "string" &&
+    isArtifactKind(value.kind) &&
+    isArtifactSource(value.source) &&
+    isArtifactPrivacy(value.privacy)
+  );
+}
 
 function createArtifact(
   kind: ArtifactKind,
@@ -149,7 +211,53 @@ function createArtifact(
     ...(size !== undefined ? { size } : {}),
     ...(options.fingerprint !== undefined ? { fingerprint: options.fingerprint } : {}),
     ...(options.storage !== undefined ? { storage: options.storage } : {}),
+    ...(options.lineage !== undefined ? { lineage: options.lineage } : {}),
   };
+}
+
+function defaultMediaTypeForKind(kind: ArtifactKind): string | undefined {
+  switch (kind) {
+    case "text":
+      return "text/plain";
+    case "json":
+    case "tool-result":
+      return "application/json";
+    default:
+      return undefined;
+  }
+}
+
+function isArtifactKind(value: unknown): value is ArtifactKind {
+  return (
+    value === "text" ||
+    value === "json" ||
+    value === "file" ||
+    value === "image" ||
+    value === "audio" ||
+    value === "video" ||
+    value === "document" ||
+    value === "url" ||
+    value === "tool-result"
+  );
+}
+
+function isArtifactSource(value: unknown): value is ArtifactSource {
+  return (
+    value === "inline" ||
+    value === "file" ||
+    value === "url" ||
+    value === "generated" ||
+    value === `provider-${"up"}${"load"}` ||
+    value === "tool"
+  );
+}
+
+function isArtifactPrivacy(value: unknown): value is ArtifactPrivacy {
+  return value === "standard" || value === "sensitive" || value === "restricted";
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
 }
 
 function createArtifactId(kind: ArtifactKind): string {
