@@ -13,7 +13,7 @@ Lattice v1 builds the runtime spine before the showcase: first the public TypeSc
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Runtime API & Output Contracts** - Developers can compile against the small TypeScript API and typed output contracts.
-- [ ] **Phase 2: Artifact Lifecycle & Storage** - Developers can create, persist, reuse, and trace provider-neutral artifacts.
+- [x] **Phase 2: Artifact Lifecycle & Storage** - Developers can create, persist, reuse, and trace provider-neutral artifacts.
 - [ ] **Phase 3: Deterministic Planning & Execution Spine** - Developers can dry-run and execute provider-independent plans with deterministic routing and fake providers.
 - [ ] **Phase 4: Context, Sessions & Provider Packaging** - Developers can run session-aware, policy-safe provider attempts through explicit context packs and narrow adapters.
 - [ ] **Phase 5: Tools, Replay & Observability** - Developers can audit, replay, redact, instrument, and tool-extend runs.
@@ -103,7 +103,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Runtime API & Output Contracts | 4/4 | Complete | 2026-04-22 |
-| 2. Artifact Lifecycle & Storage | 2/3 | In Progress | - |
+| 2. Artifact Lifecycle & Storage | 3/3 | Complete | 2026-04-22 |
 | 3. Deterministic Planning & Execution Spine | 0/TBD | Not started | - |
 | 4. Context, Sessions & Provider Packaging | 0/TBD | Not started | - |
 | 5. Tools, Replay & Observability | 0/TBD | Not started | - |
