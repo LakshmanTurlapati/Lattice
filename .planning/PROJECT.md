@@ -15,11 +15,11 @@ Developers can run one capability-first task across mixed text, image, audio, vi
 ### Validated
 
 - [x] Phase 1 package/API spine: named `createAI`, `artifact`, and `output` exports; typed `ai.run({ task, artifacts, outputs, policy, session })`; `ai.session(id)` placeholder references; Lattice-owned config, provider, policy, storage, tracing, artifact, session, result, and output contract types; Standard Schema/Zod-compatible output inference and validation.
+- [x] Phase 2 artifact lifecycle and storage: text, JSON, file, image, audio, document, URL, tool-result, and derived artifacts; payload-free refs; metadata, privacy, size, storage refs, fingerprints, and lineage; memory/local development stores; runtime/output/public package artifact boundaries.
 
 ### Active
 
 - [ ] Extend the tiny public TypeScript API beyond the Phase 1 spine with durable sessions, `branch`, `replay`, and richer execution plan behavior.
-- [ ] Model all inputs, outputs, files, media, and tool results as first-class `Artifact`s with reusable references.
 - [ ] Let developers express tasks in terms of requested outputs and policy constraints rather than hardcoded provider/model calls.
 - [ ] Implement automatic context management with live context, compressed summary, and archived raw artifacts.
 - [ ] Build provider packaging that handles URL, base64, upload ID, resized/transcoded media, chunked PDFs, and provider-specific message formats.
@@ -52,6 +52,8 @@ The wedge is the multimodal work inbox: support, insurance, logistics, field ope
 
 Phase 1 completed on 2026-04-22. Lattice now has a verified TypeScript package foundation with named public exports, provider-neutral runtime/config/policy/artifact/session contracts, typed multi-output result inference, Standard Schema/Zod validation, a Phase 1 `ai.run` skeleton, and an `ai.session(id)` placeholder.
 
+Phase 2 completed on 2026-04-22. Lattice now has a verified artifact lifecycle model with synchronous constructors, payload-free refs, metadata/privacy/storage/fingerprint fields, lineage descriptors, memory and local filesystem development stores, and artifact refs wired through provider, runtime, output, and public package boundaries.
+
 ## Constraints
 
 - **Language**: TypeScript-first — closest competitors and early adopters are strongest in the app/product integration ecosystem.
@@ -69,7 +71,7 @@ Phase 1 completed on 2026-04-22. Lattice now has a verified TypeScript package f
 | Build Lattice as a capability-first runtime SDK | The missing product is a layer above provider adapters and media APIs, not another wrapper around one model API. | — Pending |
 | Start TypeScript-first | The strongest adjacent products and app integration pain are in the TypeScript ecosystem. | — Pending |
 | Use a deterministic router for v0.1 | Inspectability and trust matter more than magical but opaque routing early. | — Pending |
-| Make artifacts the universal content model | Text, image, audio, video, PDF, JSON, and tool results need the same lifecycle: reference, transform, package, reuse, trace. | — Pending |
+| Make artifacts the universal content model | Text, image, audio, video, PDF, JSON, and tool results need the same lifecycle: reference, transform, package, reuse, trace. | Validated in Phase 2: artifact constructors, refs, metadata, storage, fingerprints, lineage, and runtime/output boundaries are implemented. |
 | Treat context management as built-in runtime behavior | Manual trimming, summarizer middleware, and developer-managed file stuffing are core pain points this product should remove. | — Pending |
 | Focus the first showcase on the multimodal work inbox | It exercises text, image, audio, files, structured outputs, policy routing, artifact packaging, and optional speech in one understandable workflow. | — Pending |
 | Keep Phase 1 sessions as references only | Full persistence, context packs, summaries, branching, and replay belong in later phases; Phase 1 only needs a stable public placeholder. | `ai.session(id)` returns a `SessionRef` and can be passed into `ai.run`. |
@@ -92,4 +94,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-22 after Phase 1 completion*
+*Last updated: 2026-04-22 after Phase 2 completion*
