@@ -136,66 +136,68 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| API-01 | TBD | Pending |
-| API-02 | TBD | Pending |
-| API-03 | TBD | Pending |
-| API-04 | TBD | Pending |
-| API-05 | TBD | Pending |
-| ART-01 | TBD | Pending |
-| ART-02 | TBD | Pending |
-| ART-03 | TBD | Pending |
-| ART-04 | TBD | Pending |
-| ART-05 | TBD | Pending |
-| OUT-01 | TBD | Pending |
-| OUT-02 | TBD | Pending |
-| OUT-03 | TBD | Pending |
-| OUT-04 | TBD | Pending |
-| ROUT-01 | TBD | Pending |
-| ROUT-02 | TBD | Pending |
-| ROUT-03 | TBD | Pending |
-| ROUT-04 | TBD | Pending |
-| ROUT-05 | TBD | Pending |
-| ROUT-06 | TBD | Pending |
-| EXEC-01 | TBD | Pending |
-| EXEC-02 | TBD | Pending |
-| EXEC-03 | TBD | Pending |
-| EXEC-04 | TBD | Pending |
-| EXEC-05 | TBD | Pending |
-| EXEC-06 | TBD | Pending |
-| CTX-01 | TBD | Pending |
-| CTX-02 | TBD | Pending |
-| CTX-03 | TBD | Pending |
-| CTX-04 | TBD | Pending |
-| CTX-05 | TBD | Pending |
-| CTX-06 | TBD | Pending |
-| CTX-07 | TBD | Pending |
-| PROV-01 | TBD | Pending |
-| PROV-02 | TBD | Pending |
-| PROV-03 | TBD | Pending |
-| PROV-04 | TBD | Pending |
-| PROV-05 | TBD | Pending |
-| PROV-06 | TBD | Pending |
-| TOOL-01 | TBD | Pending |
-| TOOL-02 | TBD | Pending |
-| TOOL-03 | TBD | Pending |
-| TOOL-04 | TBD | Pending |
-| OBS-01 | TBD | Pending |
-| OBS-02 | TBD | Pending |
-| OBS-03 | TBD | Pending |
-| OBS-04 | TBD | Pending |
-| OBS-05 | TBD | Pending |
-| OBS-06 | TBD | Pending |
-| DEMO-01 | TBD | Pending |
-| DEMO-02 | TBD | Pending |
-| DEMO-03 | TBD | Pending |
-| DEMO-04 | TBD | Pending |
-| DEMO-05 | TBD | Pending |
+| API-01 | Phase 1 | Pending |
+| API-02 | Phase 1 | Pending |
+| API-03 | Phase 1 | Pending |
+| API-04 | Phase 3 | Pending |
+| API-05 | Phase 4 | Pending |
+| ART-01 | Phase 2 | Pending |
+| ART-02 | Phase 2 | Pending |
+| ART-03 | Phase 2 | Pending |
+| ART-04 | Phase 2 | Pending |
+| ART-05 | Phase 2 | Pending |
+| OUT-01 | Phase 1 | Pending |
+| OUT-02 | Phase 1 | Pending |
+| OUT-03 | Phase 1 | Pending |
+| OUT-04 | Phase 1 | Pending |
+| ROUT-01 | Phase 3 | Pending |
+| ROUT-02 | Phase 3 | Pending |
+| ROUT-03 | Phase 3 | Pending |
+| ROUT-04 | Phase 3 | Pending |
+| ROUT-05 | Phase 3 | Pending |
+| ROUT-06 | Phase 3 | Pending |
+| EXEC-01 | Phase 3 | Pending |
+| EXEC-02 | Phase 3 | Pending |
+| EXEC-03 | Phase 3 | Pending |
+| EXEC-04 | Phase 3 | Pending |
+| EXEC-05 | Phase 3 | Pending |
+| EXEC-06 | Phase 3 | Pending |
+| CTX-01 | Phase 4 | Pending |
+| CTX-02 | Phase 4 | Pending |
+| CTX-03 | Phase 4 | Pending |
+| CTX-04 | Phase 4 | Pending |
+| CTX-05 | Phase 4 | Pending |
+| CTX-06 | Phase 4 | Pending |
+| CTX-07 | Phase 4 | Pending |
+| PROV-01 | Phase 4 | Pending |
+| PROV-02 | Phase 4 | Pending |
+| PROV-03 | Phase 4 | Pending |
+| PROV-04 | Phase 4 | Pending |
+| PROV-05 | Phase 4 | Pending |
+| PROV-06 | Phase 4 | Pending |
+| TOOL-01 | Phase 5 | Pending |
+| TOOL-02 | Phase 5 | Pending |
+| TOOL-03 | Phase 5 | Pending |
+| TOOL-04 | Phase 5 | Pending |
+| OBS-01 | Phase 5 | Pending |
+| OBS-02 | Phase 5 | Pending |
+| OBS-03 | Phase 5 | Pending |
+| OBS-04 | Phase 5 | Pending |
+| OBS-05 | Phase 5 | Pending |
+| OBS-06 | Phase 5 | Pending |
+| DEMO-01 | Phase 6 | Pending |
+| DEMO-02 | Phase 6 | Pending |
+| DEMO-03 | Phase 6 | Pending |
+| DEMO-04 | Phase 6 | Pending |
+| DEMO-05 | Phase 6 | Pending |
 
 **Coverage:**
-- v1 requirements: 53 total
-- Mapped to phases: 0
-- Unmapped: 53
+- v1 requirements: 54 total
+- Mapped to phases: 54
+- Unmapped: 0
+- Duplicate mappings: 0
+- Coverage note: Count is based on the 54 concrete v1 requirement IDs present in this file.
 
 ---
 *Requirements defined: 2026-04-22*
-*Last updated: 2026-04-22 after initial definition*
+*Last updated: 2026-04-22 after roadmap creation*
