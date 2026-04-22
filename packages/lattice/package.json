@@ -40,7 +40,8 @@
     }
   },
   "dependencies": {
-    "@standard-schema/spec": "catalog:"
+    "@standard-schema/spec": "catalog:",
+    "mime": "catalog:"
   },
   "devDependencies": {
     "zod": "catalog:"
