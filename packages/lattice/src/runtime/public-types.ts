@@ -2,9 +2,19 @@ export type {
   ArtifactFingerprint,
   ArtifactInput,
   ArtifactKind,
+  ArtifactOptions,
+  ArtifactPrivacy,
   ArtifactRef,
+  ArtifactSize,
+  ArtifactSource,
   ArtifactStorageRef,
 } from "../artifacts/artifact.js";
+export type {
+  ArtifactLineage,
+  ArtifactParentRef,
+  ArtifactTransformDescriptor,
+  ArtifactTransformKind,
+} from "../artifacts/lineage.js";
 export type {
   InferOutput,
   InferOutputMap,

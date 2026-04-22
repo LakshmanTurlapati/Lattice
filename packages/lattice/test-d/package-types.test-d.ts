@@ -88,10 +88,10 @@ async function verifyPackageTypes(): Promise<void> {
   const localStore = createLocalArtifactStore("/tmp/lattice-artifacts");
   expectType<ArtifactStore>(localStore);
 
-  const envelope = {
+  const envelope: StoredArtifactEnvelope = {
     version: 1,
     ref,
-  } satisfies StoredArtifactEnvelope;
+  };
   expectType<StoredArtifactEnvelope>(envelope);
 
   const result = await ai.run({
