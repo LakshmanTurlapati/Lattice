@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: ready
-stopped_at: Phase 2 completed and verified
-last_updated: "2026-04-22T17:38:33.154Z"
+status: completed
+stopped_at: Milestone v1.0 completed, audited, and archived
+last_updated: "2026-04-22T18:15:07.476Z"
 last_activity: 2026-04-22
 progress:
   total_phases: 6
-  completed_phases: 2
-  total_plans: 7
-  completed_plans: 7
+  completed_phases: 6
+  total_plans: 11
+  completed_plans: 11
   percent: 100
 ---
 
@@ -21,13 +21,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-22)
 
 **Core value:** Developers can run one capability-first task across mixed text, image, audio, video, file, JSON, and tool artifacts while Lattice reliably chooses, packages, routes, and explains the underlying model work.
-**Current focus:** Phase 03 — deterministic-planning-&-execution-spine
+**Current focus:** Milestone v1.0 complete, audited, and archived
 
 ## Current Position
 
-Phase: 3
-Plan: Not started
-Status: Phase 2 complete — ready to plan Phase 3
+Phase: Complete
+Plan: All plans complete
+Status: Phases 1-6 complete, audit passed, milestone archived
 Last activity: 2026-04-22
 
 Progress: [██████████] 100%
@@ -91,6 +91,13 @@ Recent decisions affecting current work:
 - [Phase 02-artifact-lifecycle-storage]: Local filesystem storage uses inspectable metadata.json envelopes plus payload.json or payload.bin files.
 - [Phase 02-artifact-lifecycle-storage]: Provider/output artifact boundaries normalize payload-bearing refs to payload-free ArtifactRef before public results.
 - [Phase 02-artifact-lifecycle-storage]: Public lattice exports now include artifact lifecycle, lineage, storage contracts, and memory/local store factories as named exports.
+- [Phase 03-deterministic-planning-execution-spine]: Runtime now exposes `ai.plan(...)` and stable execution-plan JSON with deterministic route candidates, fallback chains, stages, warnings, estimates, attempts, and typed no-route results.
+- [Phase 03-deterministic-planning-execution-spine]: Fake providers execute through the same provider-independent runtime path as real adapters and emit typed run events.
+- [Phase 04-context-sessions-provider-packaging]: Sessions, context packs, provider attempts, artifact storage, and execution plans are modeled as separate state records.
+- [Phase 04-context-sessions-provider-packaging]: Provider packaging records policy-safe transport choices and provider-packaging lineage refs before adapter execution.
+- [Phase 05-tools-replay-observability]: Local and MCP-like tools validate inputs and return artifact-backed tool-result artifacts.
+- [Phase 05-tools-replay-observability]: Replay envelopes are redacted by default and can be replayed offline or rerun live with drift warnings.
+- [Phase 06-work-inbox-showcase]: The work-inbox showcase runs through the public package entrypoint with deterministic fixtures and prints route/context/packaging/replay inspection data.
 
 ### Pending Todos
 
@@ -98,9 +105,7 @@ None yet.
 
 ### Blockers/Concerns
 
-- [Phase 4]: Provider packaging and adapter behavior need deeper provider-specific research before execution planning.
-- [Phase 5]: Replay, redaction, and observability need security-focused review during phase planning.
-- [Phase 6]: Optional speech/audio paths in the work-inbox showcase need provider validation before promising more than a narrow path.
+None.
 
 ### Quick Tasks Completed
 
@@ -110,6 +115,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-22T17:32:41.234Z
-Stopped at: Phase 2 completed and verified
+Last session: 2026-04-22T18:00:30.264Z
+Stopped at: Milestone v1.0 completed, audited, and archived
 Resume file: None

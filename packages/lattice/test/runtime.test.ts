@@ -197,7 +197,7 @@ describe("createAI runtime facade", () => {
       for (const resultArtifact of result.artifacts) {
         expect(resultArtifact).not.toHaveProperty("value");
       }
-      expect(result.plan.kind).toBe("plan-stub");
+      expect(result.plan.kind).toBe("execution-plan");
     }
   });
 
@@ -221,7 +221,7 @@ describe("createAI runtime facade", () => {
     expect(result.ok).toBe(false);
     if (!result.ok) {
       expect(result.error.kind).toBe("validation");
-      expect(result.plan.kind).toBe("plan-stub");
+      expect(result.plan.kind).toBe("execution-plan");
     }
   });
 
@@ -250,7 +250,7 @@ describe("createAI runtime facade", () => {
     } satisfies PolicySpec;
     const runPolicy = {
       maxCostUsd: 1,
-      latency: "batch",
+      latency: "interactive",
     } satisfies PolicySpec;
     const controller = new AbortController();
     const adapter = {
@@ -261,7 +261,7 @@ describe("createAI runtime facade", () => {
           maxCostUsd: 1,
           privacy: "sensitive",
           noUpload: true,
-          latency: "batch",
+          latency: "interactive",
         });
         expect(request.signal).toBe(controller.signal);
 

@@ -1,0 +1,4 @@
+Return policy excerpt:
+1. If photo evidence shows shipping damage, offer replacement before refund.
+2. If the customer reports safety risk or exposed wiring, escalate immediately.
+3. Sensitive call transcripts must not be logged or sent through public URLs.

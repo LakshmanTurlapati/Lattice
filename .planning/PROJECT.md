@@ -16,17 +16,14 @@ Developers can run one capability-first task across mixed text, image, audio, vi
 
 - [x] Phase 1 package/API spine: named `createAI`, `artifact`, and `output` exports; typed `ai.run({ task, artifacts, outputs, policy, session })`; `ai.session(id)` placeholder references; Lattice-owned config, provider, policy, storage, tracing, artifact, session, result, and output contract types; Standard Schema/Zod-compatible output inference and validation.
 - [x] Phase 2 artifact lifecycle and storage: text, JSON, file, image, audio, document, URL, tool-result, and derived artifacts; payload-free refs; metadata, privacy, size, storage refs, fingerprints, and lineage; memory/local development stores; runtime/output/public package artifact boundaries.
+- [x] Phase 3 deterministic planning and execution: `ai.plan(...)`, stable execution-plan JSON, capability catalog routing, deterministic hard filters/scoring, fallback chains, typed no-route outcomes, fake providers, provider-independent execution, and typed run events.
+- [x] Phase 4 context, sessions, and provider packaging: memory session store, turns/artifacts/plan history/branching, context packs with reasons and trust labels, progressive overrides, policy-safe provider packaging, and narrow OpenAI/OpenAI-compatible/AI SDK adapter factories.
+- [x] Phase 5 tools, replay, and observability: Standard Schema local tools, explicit MCP-like tool imports, artifact-backed tool results, replay envelopes, offline replay, live rerun warnings, default redaction, and structured event/tracing hooks.
+- [x] Phase 6 work-inbox showcase: executable public API example with message, photo, transcript, PDF/policy artifacts, structured action output, route/context/packaging inspection, offline replay, and adversarial fixtures.
 
 ### Active
 
-- [ ] Extend the tiny public TypeScript API beyond the Phase 1 spine with durable sessions, `branch`, `replay`, and richer execution plan behavior.
-- [ ] Let developers express tasks in terms of requested outputs and policy constraints rather than hardcoded provider/model calls.
-- [ ] Implement automatic context management with live context, compressed summary, and archived raw artifacts.
-- [ ] Build provider packaging that handles URL, base64, upload ID, resized/transcoded media, chunked PDFs, and provider-specific message formats.
-- [ ] Route deterministically from capability matrix, policy scoring, budget, latency, privacy, and fallback rules.
-- [ ] Expose an inspectable execution plan showing stages, selected models, context budget, fallbacks, artifacts used, cost, and latency tradeoffs.
-- [ ] Support a first showcase use case: a multimodal work inbox that accepts user text, screenshots/photos, voice/call recordings, and PDFs, then returns text, structured JSON action, and optional speech.
-- [ ] Keep advanced controls available through progressive disclosure: force model/provider, custom summarizer, artifact transforms, hooks, and routing policy overrides.
+No active v1 requirements remain. Future work starts from v2 requirements or a new milestone.
 
 ### Out of Scope
 
@@ -54,6 +51,14 @@ Phase 1 completed on 2026-04-22. Lattice now has a verified TypeScript package f
 
 Phase 2 completed on 2026-04-22. Lattice now has a verified artifact lifecycle model with synchronous constructors, payload-free refs, metadata/privacy/storage/fingerprint fields, lineage descriptors, memory and local filesystem development stores, and artifact refs wired through provider, runtime, output, and public package boundaries.
 
+Phase 3 completed on 2026-04-22. Lattice now has deterministic dry-run planning, capability catalog routing, fallback/no-route behavior, stable execution plan JSON, fake providers, provider-independent execution, and typed run events.
+
+Phase 4 completed on 2026-04-22. Lattice now has explicit memory sessions, context packs, progressive runtime overrides, policy-safe provider packaging, and narrow provider adapter factories.
+
+Phase 5 completed on 2026-04-22. Lattice now has schema-validated local/MCP-like tools, artifact-backed tool results, replay envelopes, offline/live replay helpers, default redaction, and structured event observability.
+
+Phase 6 completed on 2026-04-22. Lattice now includes an executable multimodal work-inbox showcase using the public package entrypoint and deterministic fixtures.
+
 ## Constraints
 
 - **Language**: TypeScript-first — closest competitors and early adopters are strongest in the app/product integration ecosystem.
@@ -70,10 +75,10 @@ Phase 2 completed on 2026-04-22. Lattice now has a verified artifact lifecycle m
 |----------|-----------|---------|
 | Build Lattice as a capability-first runtime SDK | The missing product is a layer above provider adapters and media APIs, not another wrapper around one model API. | — Pending |
 | Start TypeScript-first | The strongest adjacent products and app integration pain are in the TypeScript ecosystem. | — Pending |
-| Use a deterministic router for v0.1 | Inspectability and trust matter more than magical but opaque routing early. | — Pending |
+| Use a deterministic router for v0.1 | Inspectability and trust matter more than magical but opaque routing early. | Validated in Phase 3: capability catalog routing, hard filters, scoring, fallback chains, and no-route outcomes are implemented. |
 | Make artifacts the universal content model | Text, image, audio, video, PDF, JSON, and tool results need the same lifecycle: reference, transform, package, reuse, trace. | Validated in Phase 2: artifact constructors, refs, metadata, storage, fingerprints, lineage, and runtime/output boundaries are implemented. |
-| Treat context management as built-in runtime behavior | Manual trimming, summarizer middleware, and developer-managed file stuffing are core pain points this product should remove. | — Pending |
-| Focus the first showcase on the multimodal work inbox | It exercises text, image, audio, files, structured outputs, policy routing, artifact packaging, and optional speech in one understandable workflow. | — Pending |
+| Treat context management as built-in runtime behavior | Manual trimming, summarizer middleware, and developer-managed file stuffing are core pain points this product should remove. | Validated in Phase 4: context packs record included, summarized, archived, omitted, reasons, estimates, and trust labels. |
+| Focus the first showcase on the multimodal work inbox | It exercises text, image, audio, files, structured outputs, policy routing, artifact packaging, and optional speech in one understandable workflow. | Validated in Phase 6: executable work-inbox example and fixtures are included. |
 | Keep Phase 1 sessions as references only | Full persistence, context packs, summaries, branching, and replay belong in later phases; Phase 1 only needs a stable public placeholder. | `ai.session(id)` returns a `SessionRef` and can be passed into `ai.run`. |
 
 ## Evolution
@@ -94,4 +99,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-22 after Phase 2 completion*
+*Last updated: 2026-04-22 after Phase 6 completion*

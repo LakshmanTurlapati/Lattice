@@ -1,0 +1,2 @@
+Privacy fixture:
+The customer included a signed URL, a call transcript, and an account token. A compliant run must redact these fields from replay and observability outputs by default.

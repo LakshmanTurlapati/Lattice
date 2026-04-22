@@ -23,24 +23,69 @@ export type {
   OutputContract,
   OutputContractMap,
 } from "../outputs/contracts.js";
-export type { ExecutionPlanStub } from "../plan/plan.js";
+export type {
+  ContextPackItemPlan,
+  ContextPackPlan,
+  ExecutionPlan,
+  ExecutionPlanStage,
+  ExecutionPlanStub,
+  FallbackRoute,
+  ProviderAttemptRecord,
+  ProviderPackagedArtifactPlan,
+  ProviderPackagingPlan,
+  ResultPlan,
+  RouteCandidate,
+  RouteDecision,
+  RouteRejectReason,
+  SelectedRoute,
+  UsageRecord,
+} from "../plan/plan.js";
 export type { PolicySpec } from "../policy/policy.js";
 export type {
+  CapabilityModality,
+  ModelCapability,
   ProviderAdapter,
+  ProviderDataPolicyHints,
+  ProviderLatencyClass,
+  ProviderPricingHint,
   ProviderRef,
   ProviderRunRequest,
   ProviderRunResponse,
+  ProviderTransportMode,
 } from "../providers/provider.js";
+export type {
+  ReplayEnvelope,
+} from "../replay/replay.js";
 export type { LatticeRunError, ValidationIssue } from "../results/errors.js";
 export type { RunFailure, RunResult, RunSuccess } from "../results/result.js";
-export type { SessionRef } from "../sessions/session.js";
+export type {
+  AppendSessionTurnInput,
+  CreateSessionOptions,
+  SessionRecord,
+  SessionRef,
+  SessionStore,
+  SessionSummary,
+  SessionTurn,
+} from "../sessions/session.js";
 export type {
   ArtifactStore,
   StorageLike,
   StoredArtifactEnvelope,
   StoredArtifactPayloadDescriptor,
 } from "../storage/storage.js";
-export type { TracerLike } from "../tracing/tracing.js";
+export type {
+  RunEvent,
+  RunEventKind,
+  RunEventSink,
+  TracerLike,
+} from "../tracing/tracing.js";
+export type {
+  McpLikeClient,
+  McpToolDescriptor,
+  ToolCallResult,
+  ToolDefinition,
+  ToolExecutionContext,
+} from "../tools/tools.js";
 export type {
   LatticeConfig,
   NormalizedLatticeConfig,

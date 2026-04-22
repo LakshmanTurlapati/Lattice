@@ -1,0 +1,1 @@
+Caller confirms the item powers on intermittently, requests a replacement if it can ship this week, and does not want the call transcript sent to external logging systems.

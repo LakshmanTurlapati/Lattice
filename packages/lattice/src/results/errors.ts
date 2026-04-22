@@ -15,4 +15,27 @@ export interface ExecutionUnavailableError {
   readonly message: string;
 }
 
-export type LatticeRunError = ValidationError | ExecutionUnavailableError;
+export interface NoRouteError {
+  readonly kind: "no_route";
+  readonly message: string;
+  readonly reasons: readonly string[];
+}
+
+export interface ProviderExecutionError {
+  readonly kind: "provider_execution";
+  readonly message: string;
+  readonly providerId?: string;
+  readonly modelId?: string;
+}
+
+export interface TimeoutError {
+  readonly kind: "timeout";
+  readonly message: string;
+}
+
+export type LatticeRunError =
+  | ValidationError
+  | ExecutionUnavailableError
+  | NoRouteError
+  | ProviderExecutionError
+  | TimeoutError;

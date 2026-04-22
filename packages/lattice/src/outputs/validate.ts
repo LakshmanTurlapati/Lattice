@@ -1,7 +1,7 @@
 import type { StandardSchemaV1 } from "@standard-schema/spec";
 
 import { isArtifactRef, toArtifactRef } from "../artifacts/artifact.js";
-import type { ExecutionPlanStub } from "../plan/plan.js";
+import type { ResultPlan } from "../plan/plan.js";
 import type { ValidationIssue } from "../results/errors.js";
 import type { RunResult } from "../results/result.js";
 import type { OutputContract, OutputContractMap } from "./contracts.js";
@@ -43,7 +43,7 @@ export async function validateSchemaOutput<S extends StandardSchemaV1>(
 export async function validateOutputMap<TOutputs extends OutputContractMap>(
   contracts: TOutputs,
   rawOutputs: Record<string, unknown>,
-  plan: ExecutionPlanStub,
+  plan: ResultPlan,
 ): Promise<RunResult<TOutputs>> {
   const outputs: Record<string, unknown> = {};
 

@@ -1,8 +1,25 @@
 export { artifact } from "./artifacts/artifact.js";
 export { output } from "./outputs/contracts.js";
+export {
+  createAISdkProvider,
+  createOpenAICompatibleProvider,
+  createOpenAIProvider,
+} from "./providers/adapters.js";
+export { createFakeProvider } from "./providers/fake.js";
+export {
+  createReplayEnvelope,
+  redactArtifactRef,
+  redactPlan,
+  redactReplayEnvelope,
+  replayOffline,
+  rerunLive,
+} from "./replay/replay.js";
 export { createAI } from "./runtime/create-ai.js";
+export { createMemorySessionStore } from "./sessions/session.js";
 export { createLocalArtifactStore } from "./storage/local.js";
 export { createMemoryArtifactStore } from "./storage/memory.js";
+export { defineTool, importMcpTools, runTool, toolArtifactRef } from "./tools/tools.js";
+export { latticeVersion } from "./version.js";
 
 export type { AI, RunIntent } from "./runtime/create-ai.js";
 export type {
@@ -43,5 +60,3 @@ export type {
   TracerLike,
   ValidationIssue,
 } from "./runtime/public-types.js";
-
-export const latticeVersion = "0.0.0";

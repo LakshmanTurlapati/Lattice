@@ -12,6 +12,7 @@
     "test": "pnpm -r test",
     "test:types": "pnpm -r test:types",
     "lint:packages": "pnpm -r lint:packages",
+    "example:work-inbox": "pnpm --filter lattice build && node examples/work-inbox/index.mjs",
     "changeset": "changeset"
   },
   "devDependencies": {
