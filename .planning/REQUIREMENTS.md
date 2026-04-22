@@ -9,7 +9,7 @@ Requirements for the initial release. Each maps to roadmap phases.
 
 ### Runtime API
 
-- [ ] **API-01**: Developer can install and import a TypeScript-first `lattice` package with a small public API.
+- [x] **API-01**: Developer can install and import a TypeScript-first `lattice` package with a small public API.
 - [ ] **API-02**: Developer can create a runtime with `createAI(config)` using typed provider, storage, policy, and tracing options.
 - [ ] **API-03**: Developer can call `ai.run({ task, artifacts, outputs, policy })` without selecting a provider-specific API.
 - [ ] **API-04**: Developer can call `ai.plan(...)` to dry-run route, context, packaging, and warning decisions without provider execution.
@@ -136,7 +136,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| API-01 | Phase 1 | Pending |
+| API-01 | Phase 1 | Complete |
 | API-02 | Phase 1 | Pending |
 | API-03 | Phase 1 | Pending |
 | API-04 | Phase 3 | Pending |
