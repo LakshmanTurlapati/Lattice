@@ -12,7 +12,7 @@ Lattice v1 builds the runtime spine before the showcase: first the public TypeSc
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Runtime API & Output Contracts** - Developers can compile against the small TypeScript API and typed output contracts.
+- [x] **Phase 1: Runtime API & Output Contracts** - Developers can compile against the small TypeScript API and typed output contracts.
 - [ ] **Phase 2: Artifact Lifecycle & Storage** - Developers can create, persist, reuse, and trace provider-neutral artifacts.
 - [ ] **Phase 3: Deterministic Planning & Execution Spine** - Developers can dry-run and execute provider-independent plans with deterministic routing and fake providers.
 - [ ] **Phase 4: Context, Sessions & Provider Packaging** - Developers can run session-aware, policy-safe provider attempts through explicit context packs and narrow adapters.
@@ -30,7 +30,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. Developer can call `ai.run({ task, artifacts, outputs, policy })` through Lattice-owned types without selecting a provider-specific API.
   3. Developer can request plain text, structured JSON, multiple outputs, citations/artifact references, and generated artifact references.
   4. Developer receives typed structured-output success or typed validation failure from the public API boundary.
-**Plans**: TBD
+**Plans**: 4
 
 ### Phase 2: Artifact Lifecycle & Storage
 **Goal**: Developers can model every input, output, file, media item, and tool result as a reusable artifact with metadata, privacy labels, storage, and lineage.
@@ -98,7 +98,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Runtime API & Output Contracts | 3/4 | In Progress | - |
+| 1. Runtime API & Output Contracts | 4/4 | Complete | 2026-04-22 |
 | 2. Artifact Lifecycle & Storage | 0/TBD | Not started | - |
 | 3. Deterministic Planning & Execution Spine | 0/TBD | Not started | - |
 | 4. Context, Sessions & Provider Packaging | 0/TBD | Not started | - |
