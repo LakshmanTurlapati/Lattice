@@ -45,7 +45,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 Plans:
 - [x] 02-01-PLAN.md — Artifact constructors, metadata, privacy, refs, and lineage descriptors
 - [x] 02-02-PLAN.md — Memory and local filesystem artifact stores with metadata/payload separation
-- [ ] 02-03-PLAN.md — Public exports plus runtime/output artifact-ref integration
+- [x] 02-03-PLAN.md — Public exports plus runtime/output artifact-ref integration
 
 ### Phase 3: Deterministic Planning & Execution Spine
 **Goal**: Developers can dry-run and execute provider-independent plans with deterministic routing, observable stages/events, fake providers, and honest no-route or fallback behavior.
